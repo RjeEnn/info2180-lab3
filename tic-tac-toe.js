@@ -2,8 +2,11 @@ document.addEventListener('DOMContentLoaded', function(){
     
     var x = document.querySelectorAll("#board > div");
     var moves = [];
+    var status = document.getElementById("status");
+
     for(let i = 0; i < x.length; i++) {
         x[i].classList.add("square");
+        x[i].id = "square" + i
     }
 
 
@@ -19,7 +22,30 @@ document.addEventListener('DOMContentLoaded', function(){
                 butt[j].textContent = "O";
                 moves.push("O");
             }
+            if((butt[0].classList.contains("X") && butt[1].classList.contains("X") && butt[2].classList.contains("X")) 
+            || (butt[3].classList.contains("X") && butt[4].classList.contains("X") && butt[5].classList.contains("X")) 
+            || (butt[6].classList.contains("X") && butt[7].classList.contains("X") && butt[8].classList.contains("X")) 
+            || (butt[0].classList.contains("X") && butt[3].classList.contains("X") && butt[6].classList.contains("X")) 
+            || (butt[1].classList.contains("X") && butt[4].classList.contains("X") && butt[7].classList.contains("X")) 
+            || (butt[2].classList.contains("X") && butt[5].classList.contains("X") && butt[8].classList.contains("X")) 
+            || (butt[0].classList.contains("X") && butt[4].classList.contains("X") && butt[8].classList.contains("X")) 
+            || (butt[2].classList.contains("X") && butt[4].classList.contains("X") && butt[6].classList.contains("X"))) {
+                status.textContent = "Congratulations! X is the Winner!";
+                status.classList.add("you-won");
+            } else if((butt[0].classList.contains("O") && butt[1].classList.contains("O") && butt[2].classList.contains("O")) 
+            || (butt[3].classList.contains("O") && butt[4].classList.contains("O") && butt[5].classList.contains("O")) 
+            || (butt[6].classList.contains("O") && butt[7].classList.contains("O") && butt[8].classList.contains("O")) 
+            || (butt[0].classList.contains("O") && butt[3].classList.contains("O") && butt[6].classList.contains("O")) 
+            || (butt[1].classList.contains("O") && butt[4].classList.contains("O") && butt[7].classList.contains("O")) 
+            || (butt[2].classList.contains("O") && butt[5].classList.contains("O") && butt[8].classList.contains("O")) 
+            || (butt[0].classList.contains("O") && butt[4].classList.contains("O") && butt[8].classList.contains("O")) 
+            || (butt[2].classList.contains("O") && butt[4].classList.contains("O") && butt[6].classList.contains("O"))) {
+                status.textContent = "Congratulations! O is the Winner!";
+                status.classList.add("you-won");
+            }
         });
+
+        
 
         butt[j].addEventListener("mouseover", function() {
             if(moves.length % 2 == 0) {
@@ -29,11 +55,8 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         });
         butt[j].addEventListener("mouseout", function() {
-            if(moves.length % 2 == 0) {
-                butt[j].classList.remove("hover")
-            } else {
-                butt[j].classList.remove("hover.O");
-            }
+            butt[j].classList.remove("hover");
+            butt[j].classList.remove("hover.O");
         });
 
     }
